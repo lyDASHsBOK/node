@@ -1,0 +1,2 @@
+﻿
+start /b forever -p ./ -l ./logs/wifi-http-access-logs.log -e ./logs/wifi-http-error-logs.log -a start ./Wifi-HTTP-Server/app.js & start /b forever -p ./ -l ./logs/wifi-ws-access-logs.log -e ./logs/wifi-ws-error-logs.log -a start ./Wifi-WS-Server/app.js

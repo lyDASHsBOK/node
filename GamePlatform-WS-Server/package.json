@@ -1,0 +1,22 @@
+{
+  "name": "IFE-wifi-GamePlatform",
+  "version": "0.0.1",
+  "description": "Realtime chat system for envee IFE wifi system",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "chat",
+    "system"
+  ],
+  "author": "Xinyi Liu",
+  "license": "MIT",
+  "dependencies": {
+    "socket.io": "~0.9.16",
+    "mongodb": ">= 1.0.0",
+    "monk": ">= 0.9.0",
+    "dependable": ">0.1.0"
+  }
+}
