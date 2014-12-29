@@ -1,5 +1,5 @@
 /**
- * Created by Envee.
+ * Created by lys.
  *
  * Date: 14-11-24
  * Time: am11:16
@@ -101,14 +101,14 @@ MessageCon.prototype.onGetMessageList = function(msg){
 MessageCon.prototype.onSystemNotice = function(msg){
     console.log("send system notice...");
     if (this.isAdmin()) {
-        this.lobby_.gameUserDao.getUserByEmail('admin@enveesoft.com', BOK.createDelegate(this, function (err, senderDoc) {
+        this.lobby_.gameUserDao.getUserByEmail('admin@site.com', BOK.createDelegate(this, function (err, senderDoc) {
             if (err) {
                 console.error(err.stack);
             } else {
                 if (!senderDoc) {
                     var md5Cry = crypto.createHash("md5");
                     md5Cry.update(new Date().getTime().toString());
-                    var adminUser = {email: 'admin@enveesoft.com', name: 'SystemAdmin', IdCard: '', avatar: '', password: md5Cry.digest('hex')}
+                    var adminUser = {email: 'admin@site.com', name: 'SystemAdmin', IdCard: '', avatar: '', password: md5Cry.digest('hex')};
                     this.lobby_.gameUserDao.addUser(adminUser, BOK.createDelegate(this, function (error, adminDoc) {
                         if (adminDoc) {
                             this.sendSystemNotice_(msg, adminDoc);
