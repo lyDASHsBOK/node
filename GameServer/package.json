@@ -14,7 +14,7 @@
   "author": "Xinyi Liu",
   "license": "MIT",
   "dependencies": {
-    "socket.io": "~0.9.16",
+    "socket.io": "lyDASHsBOK/socket.io#v0.9.17.1",
     "mongodb": ">= 1.0.0",
     "monk": ">= 0.9.0"
   }
