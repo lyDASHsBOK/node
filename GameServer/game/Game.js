@@ -26,6 +26,7 @@ function Game(id, maxPlayer) {
     this.id_ = id;
     this.maxPlayerNumber_ = maxPlayer || this.constructor.MAX_PLAYER;
     this.playerCons_ = [];
+    this.listenedPlayerConEvents_ = [];
     this.pendingPlayerNumber_ = 0;
     //TODO: maybe move this 30s default timeout to somewhere sensible
     this.matchingTimeout_ = 30000;
@@ -116,7 +117,29 @@ Game.prototype.playerJoinGame = function(playerCon){
     }
 };
 
+/**
+ * @protected
+ * @param {string} event
+ * @param {Function} listener Must be handler function of game instance
+ * */
+Game.prototype.addPlayerConListener_ = function(event, listener){
+    BOK.each(this.playerCons_, function(con){
+        con.addEventListener(event, BOK.createDelegate(this, listener));
+    }, this);
+    this.listenedPlayerConEvents_.push(listener);
+};
 
+
+
+/**
+ * @protected
+ * @param {Connection} connection
+ * */
+Game.prototype.removePlayerConListeners_ = function(connection){
+    BOK.each(this.listenedPlayerConEvents_, function(event){
+        connection.removeEventListener(event);
+    });
+};
 
 
 /**
@@ -143,11 +166,12 @@ Game.prototype.start_ = function(){
 
 
 /**
- * @private
+ * @protected
  * */
 Game.prototype.playerLeaveGame_ = function(playerCon){
     playerCon.removeEventListener(Connection.Event.DISCONNECTED);
     playerCon.removeEventListener(GameCon.Event.PLAYER_LEFT_GAME);
+    this.removePlayerConListeners_(playerCon);
     
     BOK.findAndRemove(this.playerCons_, playerCon);
     console.log('Player *'+playerCon.getSocketID()+'* left game ['+this.id_+']');

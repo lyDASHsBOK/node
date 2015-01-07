@@ -15,10 +15,18 @@ EventDispatcher.prototype.addEventListener = function(eventStr, callBack)
 {
 	if(!this.listeners[eventStr])
 	{
-		this.listeners[eventStr] = new Array();
+		this.listeners[eventStr] = [];
 	}
 	
 	this.listeners[eventStr].push(callBack);
+};
+
+/**
+ * @public
+ * */
+EventDispatcher.prototype.removeAllEventListeners = function()
+{
+	this.listeners = {};
 };
 
 /**
