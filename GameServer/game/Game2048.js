@@ -20,25 +20,14 @@ Game2048.prototype.start_ = function() {
 
     //init player connections
     BOK.each(this.playerCons_, function(con){
-        con.addEventListener('playerLeftGame', BOK.createDelegate(this, this.onPlayerLeftGame_));
-        con.addEventListener('gameStart', BOK.createDelegate(this, this.onGameStart_));
-        con.addEventListener('waitingSlave', BOK.createDelegate(this, this.onWaitingSlave_));
-        con.addEventListener('selectRight', BOK.createDelegate(this, this.onSelectRight_));
-        con.addEventListener('refreshOpScore', BOK.createDelegate(this, this.onRefreshOpScore_));
-        con.addEventListener('gameFinished', BOK.createDelegate(this, this.onGameFinished_));
-    }, this);
-
-    //broadcast all player info
-    var infoCollection = [];
-    BOK.each(this.playerCons_, function(con){
-        infoCollection.push(con.playerInfo);
+        //con.socket_.on('');
     });
-    BOK.each(this.playerCons_, function(con){
-        con.sendAllPlayerInfo(infoCollection);
-    }, this);
 
-    //start making game after all player info updated
-    this.waitingMakeRaw_();
+    //start game
+    BOK.each(this.playerCons_, function(con){
+        con.send_('gamestart');
+    });
+
 
 };
 
