@@ -1,7 +1,7 @@
 {
-  "name": "IFE-wifi-NodeChatSystem",
+  "name": "Node-Game-Server",
   "version": "0.0.1",
-  "description": "Realtime chat system for envee IFE wifi system",
+  "description": "for study use",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
