@@ -10,6 +10,7 @@ var BOK = require('../../common/bok/BOK'),
     BaseLobbyServer = require('../../common/net/ws/BaseLobbyServer'),
     GameCon = require('../connection/GameCon'),
     Game2048 = require('../game/Game2048'),
+    Game2048Con = require('../connection/Game2048Con'),
     WaffleGame = require('../game/WaffleWord'),
     WaffleWordCon = require('../connection/WaffleWordCon'),
     DouDiZhuGame = require('../game/DouDiZhu'),
@@ -31,7 +32,7 @@ BOK.inherits(MainServer, BaseLobbyServer);
 function MainServer(io) {
     BaseLobbyServer.call(this, io);
 
-    this.regLobby('2048', new GameLobby('2048Lobby', Game2048, GameCon));
+    this.regLobby('2048', new GameLobby('2048Lobby', Game2048, Game2048Con));
     this.regLobby('waffle', new GameLobby('WaffleLobby', WaffleGame, WaffleWordCon));
     this.regLobby('doudizhu', new GameLobby('DouDiZhuLobby', DouDiZhuGame, DouDiZhuCon));
     this.regLobby('quizup', new QuizLobby('QuizUpLobby', QuizUpGame, {questionDao: questionDao, historyDao: historyDao}));

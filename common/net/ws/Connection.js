@@ -19,11 +19,7 @@ function Connection(socket) {
     var regX = /^on([A-Z].*[^_])$/;
     BOK.each(this.constructor.prototype, function(item, key){
         if(regX.test(key)) {
-            this.socket_.on(key.replace(regX, '$1').toLowerCase(), BOK.createDelegate(this, function(data){
-                console.log('Socket['+this.socket_.id+'] received message: '+key);
-                console.log(data);
-            }));
-            this.socket_.on(key.replace(regX, '$1').toLowerCase(), BOK.createDelegate(this, item));
+            this.onEvent_(key.replace(regX, '$1').toLowerCase(), item);
         }
     }, this);
 }
@@ -47,6 +43,13 @@ Connection.prototype.getSocketID = function() {
  * @param {Function} listener
  * */
 Connection.prototype.onEvent_ = function(event, listener) {
+    //log event traffic
+    this.socket_.on(event, BOK.createDelegate(this, function(data){
+        console.log('Socket['+this.socket_.id+'] received message: '+event);
+        console.log(data);
+    }));
+
+    //attach listener
     this.socket_.on(event, BOK.createDelegate(this, listener));
 };
 

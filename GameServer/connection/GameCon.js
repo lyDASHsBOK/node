@@ -38,6 +38,16 @@ GameCon.prototype.sendNetworkWaiting = function(data) {
 };
 
 
+/**
+ * @protected
+ * @param {string} eventName
+ */
+GameCon.prototype.respondToEvent_ = function (eventName) {
+    this.onEvent_(eventName, function(data){
+        this.dispatchEvent(eventName, data);
+    });
+};
+
 ///////////////////////// Client Socket Listener ////////////////////////////////////////
 /**
  * data:null | {}
